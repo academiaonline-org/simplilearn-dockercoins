@@ -8,6 +8,8 @@
 # docker image build --file Dockerfile-rng --tag local/simplilearn-dockercoins:test-rng /mnt/
 # docker image build --file Dockerfile-webui --tag local/simplilearn-dockercoins:test-webui /mnt/
 # docker image build --file Dockerfile-worker --tag local/simplilearn-dockercoins:test-worker /mnt/ 
+# docker swarm init
+# docker stack --compose-file docker-compose.yaml SIMPLILEARN-DOCKERCOINS
 
 networks:
   hasher:
