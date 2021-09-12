@@ -78,7 +78,7 @@ services:
     networks:
       - redis
     ports:
-      - 81:8080          
+      - 82:8080          
     read_only: true
     volumes:
       - ./webui/webui.js:/webui.js:ro
