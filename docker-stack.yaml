@@ -2,10 +2,10 @@
 # cd simplilearn-dockercoins/
 # git checkout 2021-09
 # alias docker='sudo docker'
-# docker image build --file Dockerfile-hasher-copy --tag academiaonline/simplilearn-dockercoins:copy-hasher /mnt/
-# docker image build --file Dockerfile-rng-copy --tag academiaonline/simplilearn-dockercoins:copy-rng /mnt/
-# docker image build --file Dockerfile-webui-copy --tag academiaonline/simplilearn-dockercoins:copy-webui /mnt/
-# docker image build --file Dockerfile-worker-copy --tag academiaonline/simplilearn-dockercoins:copy-worker /mnt/ 
+# docker image build --file Dockerfile-hasher-copy --tag academiaonline/simplilearn-dockercoins:copy-hasher hasher
+# docker image build --file Dockerfile-rng-copy --tag academiaonline/simplilearn-dockercoins:copy-rng rng
+# docker image build --file Dockerfile-webui-copy --tag academiaonline/simplilearn-dockercoins:copy-webui webui
+# docker image build --file Dockerfile-worker-copy --tag academiaonline/simplilearn-dockercoins:copy-worker worker
 # docker swarm init
 
 # docker swarm join-token worker
