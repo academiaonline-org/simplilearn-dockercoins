@@ -91,3 +91,10 @@ docker container diff rng
 docker container diff webui
 docker container diff worker
 ```
+```
+docker container logs hasher --tail 1
+docker container logs redis --tail 1
+docker container logs rng --tail 1
+docker container logs webui --tail 1
+docker container logs worker --tail 1
+```
