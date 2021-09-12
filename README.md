@@ -49,7 +49,7 @@ docker container run --detach \
   --restart always \
   --volume ${PWD}/rng/rng.py:/rng.py:ro \
   --volume rng_pycache:/usr/local/lib/python3.9/__pycache__/:rw \
-  --volume rng_http_pycache:/usr/local/lib/python3.9/__pycache__/:rw \
+  --volume rng_http_pycache:/usr/local/lib/python3.9/http/__pycache__/:rw \
   local/simplilearn-dockercoins:test-rng \
   rng.py
 
