@@ -6,7 +6,8 @@ cd simplilearn-dockercoins/
 git checkout 2021-09
 
 alias docker='sudo docker'
-
+```
+```
 docker image build --file Dockerfile-hasher --tag local/simplilearn-dockercoins:test-hasher /mnt/
 docker image build --file Dockerfile-rng --tag local/simplilearn-dockercoins:test-rng /mnt/
 docker image build --file Dockerfile-webui --tag local/simplilearn-dockercoins:test-webui /mnt/
@@ -28,5 +29,11 @@ docker network connect hasher worker
 docker network connect rng worker
 
 docker container run --detach --name webui --network redis --publish 80:8080 local/simplilearn-dockercoins:test-webui
-
+```
+```
+docker container top hasher
+docker container top redis
+docker container top rng
+docker container top webui
+docker container top worker
 ```
