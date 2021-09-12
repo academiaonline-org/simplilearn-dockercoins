@@ -26,7 +26,7 @@ services:
       - hasher
     read_only: true
     volumes:
-      - ${PWD}/hasher/hasher.rb:/hasher.rb:ro
+      - ./hasher/hasher.rb:/hasher.rb:ro
   redis:
     image: library/redis:6.2.5-alpine3.14@sha256:649d5317016d601ac7d6a7b7ef56b6d96196fb7df433d10143189084d52ee6f7
     networks:
@@ -42,7 +42,7 @@ services:
       - rng          
     read_only: true
     volumes:
-      - ${PWD}/rng/rng.py:/rng.py:ro
+      - ./rng/rng.py:/rng.py:ro
       - rng_pycache:/usr/local/lib/python3.9/__pycache__/:rw
       - rng_http_pycache:/usr/local/lib/python3.9/http/__pycache__/:rw
   webui:
@@ -55,8 +55,8 @@ services:
       - 81:8080          
     read_only: true
     volumes:
-      - ${PWD}/webui/webui.js:/webui.js:ro
-      - ${PWD}/webui/files/:/files/:ro
+      - ./webui/webui.js:/webui.js:ro
+      - ./webui/files/:/files/:ro
   worker:
     command: worker.py
     entrypoint: python
@@ -67,7 +67,7 @@ services:
       - rng
     read_only: true
     volumes:
-      - ${PWD}/worker/worker.py:/worker.py:ro
+      - ./worker/worker.py:/worker.py:ro
       - worker_pycache:/usr/local/lib/python3.9/distutils/__pycache__/:rw
           
 version: '3.8'
