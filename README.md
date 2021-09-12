@@ -18,17 +18,60 @@ docker network create redis
 docker network create rng
 
 docker volume create redis
+docker volume create rng_pycache
+docker volume create rng_http_pycache
+docker volume create worker_pycache
 
-docker container run --detach --name redis --network redis --volume redis:/data:rw library/redis:6.2.5-alpine3.14@sha256:649d5317016d601ac7d6a7b7ef56b6d96196fb7df433d10143189084d52ee6f7
-docker container run --detach --entrypoint ruby --name hasher --network hasher --volume ${PWD}/hasher/hasher.rb:/hasher.rb:ro local/simplilearn-dockercoins:test-hasher hasher.rb
-docker container run --detach --entrypoint python --name rng --network rng --volume ${PWD}/rng/rng.py:/rng.py:ro local/simplilearn-dockercoins:test-rng rng.py
+docker container run --detach \
+  --name redis --network redis \
+  --read-only \
+  --restart always \
+  --volume redis:/data:rw \
+  library/redis:6.2.5-alpine3.14@sha256:649d5317016d601ac7d6a7b7ef56b6d96196fb7df433d10143189084d52ee6f7
+  
+docker container run --detach \
+  --entrypoint ruby \
+  --name hasher --network hasher \
+  --read-only \
+  --restart always \
+  --volume ${PWD}/hasher/hasher.rb:/hasher.rb:ro \
+  local/simplilearn-dockercoins:test-hasher \
+  hasher.rb
+  
+docker container run --detach \
+  --entrypoint python \
+  --name rng --network rng \
+  --read-only \
+  --restart always \
+  --volume ${PWD}/rng/rng.py:/rng.py:ro \
+  --volume rng_pycache:/usr/local/lib/python3.9/__pycache__/:rw \
+  --volume rng_http_pycache:/usr/local/lib/python3.9/__pycache__/:rw \
+  local/simplilearn-dockercoins:test-rng \
+  rng.py
 
-docker container run --detach --entrypoint python --name worker --network redis --volume ${PWD}/worker/worker.py:/worker.py:ro local/simplilearn-dockercoins:test-worker worker.py
+docker container run --detach \
+  --entrypoint python \
+  --name worker --network redis \
+  --read-only \
+  --restart always \
+  --volume ${PWD}/worker/worker.py:/worker.py:ro \
+  --volume worker_pycache:/usr/local/lib/python3.9/distutils/__pycache__/:rw \
+  local/simplilearn-dockercoins:test-worker \
+  worker.py
 
 docker network connect hasher worker
 docker network connect rng worker
 
-docker container run --detach --entrypoint node --name webui --network redis --publish 80:8080 --volume ${PWD}/webui/webui.js:/webui.js:ro --volume ${PWD}/webui/files/:/files/:ro local/simplilearn-dockercoins:test-webui webui.js
+docker container run --detach \
+  --entrypoint node \
+  --name webui --network redis \
+  --read-only \
+  --restart always \
+  --publish 80:8080 \
+  --volume ${PWD}/webui/webui.js:/webui.js:ro \
+  --volume ${PWD}/webui/files/:/files/:ro \
+  local/simplilearn-dockercoins:test-webui \
+  webui.js
 ```
 ```
 docker container top hasher
