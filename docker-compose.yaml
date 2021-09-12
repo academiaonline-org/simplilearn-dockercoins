@@ -74,7 +74,6 @@ services:
           
 version: '3.8'
 
-
 volumes:
   redis:
   rng_pycache:
