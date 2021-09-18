@@ -1,5 +1,11 @@
-apiVersion:
-kind:
-metadata:
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+  name: hasher-rc
 spec:
-status:
+  replicas: 2
+  selector: 
+    app: hasher
+  template:
+    
+status: {}
