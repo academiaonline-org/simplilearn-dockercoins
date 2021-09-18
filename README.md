@@ -98,3 +98,10 @@ docker container logs rng --tail 1
 docker container logs webui --tail 1
 docker container logs worker --tail 1
 ```
+```
+docker container stats --no-stream hasher
+docker container stats --no-stream redis
+docker container stats --no-stream rng
+docker container stats --no-stream webui
+docker container stats --no-stream worker
+```
