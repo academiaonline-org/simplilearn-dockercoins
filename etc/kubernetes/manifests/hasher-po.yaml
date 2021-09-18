@@ -76,4 +76,8 @@ spec:
           readOnly: false      
       workingDir: /downloads/
   volumes:
-status:
+    -
+      emptyDir:
+        medium: Memory
+        sizeLimit: 1M
+      name: hasher-volume
