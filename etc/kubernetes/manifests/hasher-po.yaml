@@ -1,5 +1,50 @@
+# git clone https://github.com/academiaonline/simplilearn-dockercoins 
+# cd simplilearn-dockercoins/
+# git checkout 2021-09
+# alias docker='sudo docker'
+# docker image build --file Dockerfile-hasher --tag academiaonline/simplilearn-dockercoins:latest-hasher /mnt/
+# docker image build --file Dockerfile-rng --tag academiaonline/simplilearn-dockercoins:latest-rng /mnt/
+# docker image build --file Dockerfile-webui --tag academiaonline/simplilearn-dockercoins:latest-webui /mnt/
+# docker image build --file Dockerfile-worker --tag academiaonline/simplilearn-dockercoins:latest-worker /mnt/
+# docker login
+# docker image push academiaonline/simplilearn-dockercoins:latest-hasher 
+# docker image push academiaonline/simplilearn-dockercoins:latest-rng 
+# docker image push academiaonline/simplilearn-dockercoins:latest-webui 
+# docker image push academiaonline/simplilearn-dockercoins:latest-worker 
+
 apiVersion: v1
-kind:
+kind: Pod
 metadata:
+  name: hasher-po
 spec:
+  containers:
+    -
+      args: 
+        - hasher.rb
+      command:
+        - ruby
+      env:
+        -
+          name: AUTHOR
+          value: "Sebastian Colomar"
+      image: academiaonline/simplilearn-dockercoins:latest-hasher
+      livenessProbe:
+        tcpSocket:
+          port: 8080
+      name: hasher-container
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 8080
+      resources:
+        limits:
+          cpu: 100m
+          memory: 100M
+        requests: 
+          cpu: 100m
+          memory: 100M
+      volumeMounts:
+      workingDir:
+  initContainers:
+  volumes:
 status:
