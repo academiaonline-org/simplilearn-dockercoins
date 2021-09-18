@@ -44,7 +44,12 @@ spec:
           cpu: 100m
           memory: 100M
       volumeMounts:
-      workingDir:
+        -
+          mountPath: /
+          name: hasher-volume
+          readOnly: true
+          subPath: hasher.rb
+      workingDir: /
   initContainers:
   volumes:
 status:
