@@ -45,11 +45,10 @@ spec:
           memory: 100M
       volumeMounts:
         -
-          mountPath: /
+          mountPath: /app/
           name: hasher-volume
           readOnly: true
-          subPath: hasher.rb
-      workingDir: /
+      workingDir: /app/
   initContainers:
     -
       args: 
