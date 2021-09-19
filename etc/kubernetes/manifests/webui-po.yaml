@@ -55,6 +55,7 @@ spec:
   initContainers:
     -
       args: 
+        - set -x ;
         - git clone https://github.com/academiaonline/simplilearn-dockercoins ;
         - cd simplilearn-dockercoins/ ;
         - git checkout 2021-09 ;
@@ -89,10 +90,10 @@ spec:
     -
       emptyDir:
         medium: Memory
-        sizeLimit: 1Mi
+        sizeLimit: 100Mi
       name: webui-volume
     -
       emptyDir:
         medium: Memory
-        sizeLimit: 1Mi
+        sizeLimit: 100Mi
       name: webui-downloads-volume
