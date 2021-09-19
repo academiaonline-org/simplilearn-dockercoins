@@ -55,7 +55,6 @@ spec:
   initContainers:
     -
       args: 
-        - set -x ;
         - git clone https://github.com/academiaonline/simplilearn-dockercoins ;
         - cd simplilearn-dockercoins/ ;
         - git checkout 2021-09 ;
@@ -67,7 +66,7 @@ spec:
         - 
           name: AUTHOR
           value: "Sebastian Colomar"
-      image: academiaonline/git:latest
+      image: alpine/git:1.0.30@sha256:0595334722a2d486ed7c1a10a9138180f052343d5569942ecceb88d6e7fd1c0f
       name: git-container
       resources:
         limits:
