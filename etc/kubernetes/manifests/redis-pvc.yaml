@@ -3,7 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: redis-pvc
 spec:
-  accessModes: ReadWriteOnce
+  accessModes:
+    - ReadWriteOnce
   resources:
     limits:
       storage: 1Gi
