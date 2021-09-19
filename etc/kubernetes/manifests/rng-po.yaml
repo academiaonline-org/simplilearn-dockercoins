@@ -51,11 +51,11 @@ spec:
           subPath: rng.py
         -
           mountPath: /usr/local/lib/python3.9/__pycache__/
-          name: rng_pycache-volume
+          name: rng-pycache-volume
           readOnly: false
         -
           mountPath: /usr/local/lib/python3.9/http/__pycache__/
-          name: rng_http_pycache-volume
+          name: rng-http-pycache-volume
           readOnly: false
       workingDir: /app/
   volumes:
@@ -73,10 +73,10 @@ spec:
       emptyDir:
         medium: Memory
         sizeLimit: 1M
-      name: rng_pycache-volume
+      name: rng-pycache-volume
     -
       emptyDir:
         medium: Memory
         sizeLimit: 1M
-      name: rng_http_pycache-volume
+      name: rng-http_pycache-volume
       
