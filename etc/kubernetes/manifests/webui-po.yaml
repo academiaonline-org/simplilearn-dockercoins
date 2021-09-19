@@ -1,0 +1,96 @@
+# git clone https://github.com/academiaonline/simplilearn-dockercoins 
+# cd simplilearn-dockercoins/
+# git checkout 2021-09
+# alias docker='sudo docker'
+# docker image build --file Dockerfile-hasher --tag academiaonline/simplilearn-dockercoins:latest-hasher /mnt/
+# docker image build --file Dockerfile-rng --tag academiaonline/simplilearn-dockercoins:latest-rng /mnt/
+# docker image build --file Dockerfile-webui --tag academiaonline/simplilearn-dockercoins:latest-webui /mnt/
+# docker image build --file Dockerfile-worker --tag academiaonline/simplilearn-dockercoins:latest-worker /mnt/
+# docker login
+# docker image push academiaonline/simplilearn-dockercoins:latest-hasher 
+# docker image push academiaonline/simplilearn-dockercoins:latest-rng 
+# docker image push academiaonline/simplilearn-dockercoins:latest-webui 
+# docker image push academiaonline/simplilearn-dockercoins:latest-worker 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webui-po
+spec:
+  containers:
+    -
+      args: 
+        - webui.js
+      command:
+        - node
+      env:
+        -
+          name: AUTHOR
+          value: "Sebastian Colomar"
+      image: academiaonline/simplilearn-dockercoins:latest-webui
+      livenessProbe:
+        tcpSocket:
+          port: 8080
+      name: webui-container
+      readinessProbe:
+        httpGet:
+          path: /index.html
+          port: 8080
+      resources:
+        limits:
+          cpu: 100m
+          memory: 100M
+        requests: 
+          cpu: 100m
+          memory: 100M
+      volumeMounts:
+        -
+          mountPath: /app/
+          name: webui-volume
+          readOnly: true
+      workingDir: /app/
+  initContainers:
+    -
+      args: 
+        - apk add git ;
+        - git clone https://github.com/academiaonline/simplilearn-dockercoins ;
+        - cd simplilearn-dockercoins/ ;
+        - git checkout 2021-09 ;
+        - cp -r -v webui/* /app/ ;
+      command:
+        - sh
+        - -c
+      env:
+        - 
+          name: AUTHOR
+          value: "Sebastian Colomar"
+      image: library/alpine:3.14.2@sha256:69704ef328d05a9f806b6b8502915e6a0a4faa4d72018dc42343f511490daf8a
+      name: git-container
+      resources:
+        limits:
+          cpu: 100m
+          memory: 100M
+        requests:
+          cpu: 100m
+          memory: 100M
+      volumeMounts:
+        -
+          mountPath: /app/
+          name: webui-volume
+          readOnly: false      
+        -
+          mountPath: /downloads/
+          name: webui-downloads-volume
+          readOnly: false      
+      workingDir: /downloads/
+  volumes:
+    -
+      emptyDir:
+        medium: Memory
+        sizeLimit: 1Mi
+      name: webui-volume
+    -
+      emptyDir:
+        medium: Memory
+        sizeLimit: 1Mi
+      name: webui-downloads-volume
