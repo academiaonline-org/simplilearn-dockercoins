@@ -78,5 +78,5 @@ spec:
       emptyDir:
         medium: Memory
         sizeLimit: 1M
-      name: rng-http_pycache-volume
+      name: rng-http-pycache-volume
       
