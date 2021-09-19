@@ -12,6 +12,9 @@
 # docker image push academiaonline/simplilearn-dockercoins:latest-webui 
 # docker image push academiaonline/simplilearn-dockercoins:latest-worker 
 
+# wget https://raw.githubusercontent.com/academiaonline/simplilearn-dockercoins/2021-09/rng/rng.py
+# kubectl create cm rng-cm --from-file rng.py --namespace dockercoins
+
 apiVersion: v1
 kind: Pod
 metadata:
