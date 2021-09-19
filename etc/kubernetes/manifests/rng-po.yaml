@@ -66,6 +66,7 @@ spec:
           -
             key: rng.py
             mode: 0400
+            path: rng.py
         name: rng-cm
       name: rng-volume
     -
