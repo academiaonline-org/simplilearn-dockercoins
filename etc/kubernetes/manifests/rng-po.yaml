@@ -67,7 +67,7 @@ spec:
             key: rng.py
             mode: 0400
         name: rng-cm
-      name: rng_pycache-volume
+      name: rng-volume
     -
       emptyDir:
         medium: Memory
