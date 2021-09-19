@@ -72,11 +72,11 @@ spec:
     -
       emptyDir:
         medium: Memory
-        sizeLimit: 1M
+        sizeLimit: 100M
       name: rng-pycache-volume
     -
       emptyDir:
         medium: Memory
-        sizeLimit: 1M
+        sizeLimit: 100M
       name: rng-http-pycache-volume
       
