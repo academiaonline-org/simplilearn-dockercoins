@@ -28,7 +28,8 @@ spec:
           name: redis-container
           readinessProbe:
             exec:
-              command: redis-cli INFO
+              command:
+                - redis-cli INFO
           resources:
             limits:
               cpu: 100m
