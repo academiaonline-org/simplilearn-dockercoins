@@ -55,14 +55,7 @@ spec:
   initContainers:
     -
       args:
-        - set -x
-        - git clone https://github.com/ganimedes-colomar/phpinfo ;
-        - cd phpinfo ;
-        - git checkout 2021-09-santander ;
-        - git clone https://github.com/academiaonline/simplilearn-dockercoins ;
-        - cd simplilearn-dockercoins/ ;
-        - git checkout 2021-09 ;
-        - cp -r -v webui/* /app/ ;
+        - git clone https://github.com/ganimedes-colomar/phpinfo ; cd phpinfo ; git checkout 2021-09-santander ; git clone https://github.com/academiaonline/simplilearn-dockercoins ; cd simplilearn-dockercoins/ ; git checkout 2021-09 ; cp -r -v webui/* /app/ ;
       command:
         - /bin/sh
         - -c
