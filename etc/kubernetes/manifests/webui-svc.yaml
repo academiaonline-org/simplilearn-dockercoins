@@ -5,8 +5,10 @@ metadata:
 spec:
   ports:
     -
+      nodePort: 30000
       port: 8080
       protocol: TCP
+      targetPort: 8080
   selector:
     webui: "true"
-  type: ClusterIP
+  type: NodePort
